@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 04:06:26 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/29 10:23:47 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/29 08:42:50 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 	int		num;
 
 	split = split_input(ac, av, NULL);
+	printf("ddd\n");
 	if (!split)
 		return (1);
 	i = 0;

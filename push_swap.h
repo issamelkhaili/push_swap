@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 23:34:26 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 04:42:05 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/29 08:46:01 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ size_t		ft_strlen(const char *s);
 char		**ft_split(char const *s, char c);
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strdup(const char *s);
+int			is_space(char *str);
 
 #endif

@@ -6,32 +6,37 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 00:48:14 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 03:57:36 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:59:22 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	**split_input(int ac, char **av, t_stacks *stacks)
+char    **split_input(int ac, char **av, t_stacks *stacks)
 {
-	char	**split;
-	char	*joined;
+    char    **split;
+    char    *joined;
 
-	if (ac == 1)
-		error_exit(NULL);
-	if (ac == 2)
-		split = ft_split(av[1], ' ');
-	else
-	{
-		joined = join_arguments(ac, av);
-		if (!joined)
-			error_exit(stacks);
-		split = ft_split(joined, ' ');
-		free(joined);
-	}
-	if (!split)
-		error_exit(stacks);
-	return (split);
+    if (ac == 1)
+        error_exit(NULL);
+    else if (ac == 2)
+        split = ft_split(av[1], ' ');
+    else
+    {
+        joined = join_arguments(ac, av);
+        if (!joined)
+        {
+            if (stacks)
+                error_exit(stacks);
+            write(2, "Error\n", 6);
+            exit(1);
+        }
+        split = ft_split(joined, ' ');
+        free(joined);
+    }
+    if (!split)
+        error_exit(stacks);
+    return (split);
 }
 
 static void	fill_stack(t_stacks *stacks, char **split, int size)
