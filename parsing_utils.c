@@ -12,39 +12,41 @@
 
 #include "push_swap.h"
 
-static char	*join_args_helper(char *result, char *av_str)
+static char    *join_args_helper(char *result, char *av_str)
 {
-	char	*temp;
-	char	*new_result;
+    char    *temp;
+    char    *new_result;
 
-	if (!result || !av_str)
-		return (NULL);
-	temp = ft_strjoin(result, " ");
-	free(result);
-	if (!temp)
-		return (NULL);
-	new_result = ft_strjoin(temp, av_str);
-	free(temp);
-	return (new_result);
+    if (!result || !av_str)
+        return (NULL);
+    temp = ft_strjoin(result, " ");
+    if (!temp)
+        return (NULL);
+    new_result = ft_strjoin(temp, av_str);
+    free(temp);
+    free(result);  // Free the old result here
+    return (new_result);
 }
 
-char	*join_arguments(int ac, char **av)
+char    *join_arguments(int ac, char **av)
 {
-	char	*result;
-	int		i;
+    char    *result;
+    int     i;
 
-	result = ft_strdup(av[1]);
-	if (!result)
-		return (NULL);
-	i = 2;
-	while (i < ac)
-	{
-		result = join_args_helper(result, av[i]);
-		if (!result)
-			return (NULL);
-		i++;
-	}
-	return (result);
+    if (!av[1])
+        return (NULL);
+    result = ft_strdup(av[1]);
+    if (!result)
+        return (NULL);
+    i = 2;
+    while (i < ac)
+    {
+        result = join_args_helper(result, av[i]);
+        if (!result)
+            return (NULL);
+        i++;
+    }
+    return (result);
 }
 
 int	is_valid_integer(const char *str, int *num)
