@@ -18,9 +18,15 @@ char    **split_input(int ac, char **av, t_stacks *stacks)
     char    *joined;
 
     if (ac == 1)
-        error_exit(NULL);
+    {
+	    write(1,"error_exit", 10);
+	    error_exit(NULL);
+    }
     else if (ac == 2)
-        split = ft_split(av[1], ' ');
+    {
+	    write(1,"input_split",11);
+	    split = ft_split(av[1], ' ');
+    }
     else
     {
         joined = join_arguments(ac, av);
@@ -34,8 +40,8 @@ char    **split_input(int ac, char **av, t_stacks *stacks)
         split = ft_split(joined, ' ');
         free(joined);
     }
-    if (!split)
-        error_exit(stacks);
+    /*if (!split)
+        error_exit(stacks);*/
     return (split);
 }
 
