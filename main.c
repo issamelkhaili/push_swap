@@ -58,5 +58,6 @@ int	main(int ac, char **av)
 	if (has_duplicates(stacks->a, stacks->size_a))
 		error_exit(stacks);
 	free(joined_arguments);
+	free_stacks(stacks);
 	return (0);
 }
