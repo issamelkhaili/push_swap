@@ -29,18 +29,10 @@ typedef struct s_stacks
 }	t_stacks;
 
 /* Parsing Functions */
-int		is_valid_input(char *str);
-int		is_number(char *str);
-int		is_integer(char *str);
-int		is_space(char c);
-int		check_duplicates(int *arr, int size);
-char	*join_arguments(int ac, char **av);
-long    ft_atol(const char *str);
-
-/* Split Functions */
-char		**ft_split(char	*s, char c);
-size_t		ft_countword(const char *s, const char c);
-char		**ft_malfree(char **result, int i);
+char		*join_arguments(int ac, char **av);
+int			check_input(int ac, char **av);
+int			is_valid_argument(char *str);
+long		ft_atol(const char *str);
 
 /* Stack Operations */
 void		sa(t_stacks *stacks);
@@ -61,18 +53,17 @@ void		sort_three(t_stacks *stacks);
 /* Memory Management Functions */
 void		exit_error(void);
 void		clean_exit(t_stacks *stacks);
-void    	error_free(char *joined);
-void		split_error(char **split);
+void		error_free(char *joined);
 void		free_stacks(t_stacks *stacks);
 void		error_exit(t_stacks *stacks);
-int    		check_input(int ac, char **av);
-int    		is_valid_argument(char *str);
+t_stacks	*init_stacks(int size);
+int     	fill_stack_a(char *str, t_stacks *stacks);
 
 /* Utility Functions */
+int			has_duplicates(int *array, int size);
 size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char *s1, char *s2);
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int			ft_isdigit(int c);
 
 #endif

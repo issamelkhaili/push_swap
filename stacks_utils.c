@@ -47,3 +47,27 @@ t_stacks	*init_stacks(int size)
 		error_exit(stacks);
 	return (stacks);
 }
+
+int	fill_stack_a(char *str, t_stacks *stacks)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	index = 0;
+	while (str[i])
+	{
+		while (str[i] == ' ')
+			i++;
+		if (str[i])
+		{
+			stacks->a[index] = ft_atol(str + i);
+			index++;
+			while (str[i] && str[i] != ' ')
+				i++;
+		}
+	}
+	stacks->size_a = index;
+	stacks->size_b = 0;
+	return (1);
+}

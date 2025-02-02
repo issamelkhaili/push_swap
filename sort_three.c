@@ -1,31 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_three.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/02/02 08:38:15 by isel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	sort_three(t_stacks	*stacks)
+static void	handle_first_cases(t_stacks *stacks)
 {
-	if (stacks->size_a == 2) //2_1_3
+	if (stacks->size_a == 2)
 	{
 		if (stacks->a[0] > stacks->a[1])
 			sa(stacks);
-		return;
+		return ;
 	}
-	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] > stacks->a[2]) //3_2_1
+	if (stacks->a[0] > stacks->a[1] && stacks->a[1] > stacks->a[2])
 	{
 		sa(stacks);
 		rra(stacks);
-		return;
 	}
-	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] < stacks->a[2] && stacks->a[0] > stacks->a[2]) //3_1_2
-	{
+}
+
+void	sort_three(t_stacks *stacks)
+{
+	handle_first_cases(stacks);
+	if (stacks->a[0] > stacks->a[1] && stacks->a[0] > stacks->a[2])
 		ra(stacks);
-		return;
-	}
-	else if (stacks->a[0] < stacks->a[1] && stacks->a[1] > stacks->a[2] && stacks->a[0] < stacks->a[2]) //1_3_2
+	else if (stacks->a[1] > stacks->a[0] && stacks->a[1] > stacks->a[2])
 	{
 		sa(stacks);
 		ra(stacks);
 	}
-	else if(stacks->a[0] < stacks->a[1] && stacks->a[0] > stacks->a[2] && stacks->a[1] < stacks->a[2]) //2_3_1
-	{
+	else if (stacks->a[0] > stacks->a[2])
 		rra(stacks);
-	}
 }

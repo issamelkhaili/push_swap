@@ -12,9 +12,23 @@
 
 #include "push_swap.h"
 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/02/02 08:38:15 by isel-kha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
 int	check_input(int ac, char **av)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	while (i < ac)
@@ -28,7 +42,7 @@ int	check_input(int ac, char **av)
 
 int	is_valid_argument(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (!str || !str[0])
