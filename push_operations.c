@@ -23,7 +23,7 @@ void	pa(t_stacks *stacks)
 	int		i;
 
 	if (!stacks || stacks->size_b < 1)
-		error_exit(stacks);
+		clean_exit(stacks);
 	i = stacks->size_a;
 	while (i > 0)
 	{
@@ -47,7 +47,7 @@ void	pb(t_stacks *stacks)
 	int	i;
 
 	if (!stacks || stacks->size_a < 1)
-		error_exit(stacks);
+		clean_exit(stacks);
 	i = stacks->size_b;
 	while (i > 0)
 	{

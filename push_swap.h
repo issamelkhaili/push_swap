@@ -5,27 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 23:34:26 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/29 08:46:01 by isel-kha         ###   ########.fr       */
+/*   Created: 2025/01/22 02:26:52 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/01/22 02:34:15 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include <stdlib.h>
+
 # include <unistd.h>
-# include <limits.h>
-# include <stdio.h>
+# include <stdlib.h>
+
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef struct s_stacks
 {
-	int		*a;
-	int		*b;
-	int		size_a;
-	int		size_b;
-	int		size_max;
-}				t_stacks;
+	int	*a;
+	int	*b;
+	int	size_a;
+	int	size_b;
+}	t_stacks;
 
+/* Parsing Functions */
+int		is_valid_input(char *str);
+int		is_number(char *str);
+int		is_integer(char *str);
+int		is_space(char c);
+int		check_duplicates(int *arr, int size);
+char		*join_arguments(int ac, char **av);
+
+/* Split Functions */
+char		**ft_split(char	*s, char c);
+size_t		ft_countword(const char *s, const char c);
+char		**ft_malfree(char **result, int i);
+
+/* Stack Operations */
 void		sa(t_stacks *stacks);
 void		sb(t_stacks *stacks);
 void		ss(t_stacks *stacks);
@@ -37,22 +52,25 @@ void		rr(t_stacks *stacks);
 void		rra(t_stacks *stacks);
 void		rrb(t_stacks *stacks);
 void		rrr(t_stacks *stacks);
-t_stacks	*init_stacks(int size);
+
+/* Sorting Functions */
+void		sort_three(t_stacks *stacks);
+
+/* Memory Management Functions */
+void		exit_error(t_stacks *stacks, char **split);
+void		clean_exit(t_stacks *stacks);
+void    	error_free(char *joined);
+void		split_error(char **split);
 void		free_stacks(t_stacks *stacks);
-void		error_exit(t_stacks *stacks);
-int			has_duplicates(int *array, int size);
-char		*join_arguments(int ac, char **av);
-t_stacks	*parse_numbers(char **split, int size);
-char		**split_input(int ac, char **av, t_stacks *stacks);
-int			count_split_size(char **split_array);
-int			is_valid_integer(const char *str, int *num);
-int			ft_isdigit(int c);
-size_t		ft_countword(const char *s, const char c);
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void		free_split(char **split);
+int    		check_input(int ac, char **av);
+int    		is_valid_argument(char *str);
+
+/* Utility Functions */
 size_t		ft_strlen(const char *s);
-char		**ft_split(char const *s, char c);
-char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strdup(const char *s);
-int			is_space(char *str);
+char		*ft_strjoin(char *s1, char *s2);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int		ft_isdigit(int c);
 
 #endif

@@ -23,7 +23,7 @@ void	sa(t_stacks *stacks)
 	int	temp;
 
 	if (!stacks || stacks->size_a < 2)
-		error_exit(stacks);
+		clean_exit(stacks);
 	temp = stacks->a[0];
 	stacks->a[0] = stacks->a[1];
 	stacks->a[1] = temp;
@@ -35,7 +35,7 @@ void	sb(t_stacks *stacks)
 	int	temp;
 
 	if (!stacks || stacks->size_b < 2)
-		error_exit(stacks);
+		clean_exit(stacks);
 	temp = stacks->b[0];
 	stacks->b[0] = stacks->b[1];
 	stacks->b[1] = temp;
@@ -47,7 +47,7 @@ void	ss(t_stacks	*stacks)
 	int	temp;
 
 	if (!stacks || stacks->size_b < 2 || stacks-> size_a < 2)
-		error_exit(stacks);
+		clean_exit(stacks);
 	temp = stacks->b[0];
 	stacks->b[0] = stacks->b[1];
 	stacks->b[1] = temp;

@@ -82,7 +82,7 @@ static char	**ft_splitloop(const char *s, char c, char **result, size_t *i)
 	return (result);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char	*s, char c)
 {
 	size_t	i;
 	size_t	word_count;

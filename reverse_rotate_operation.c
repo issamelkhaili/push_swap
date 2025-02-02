@@ -24,7 +24,7 @@ void	rra(t_stacks *stacks)
 	int	i;
 
 	if (!stacks || stacks->size_a < 2)
-		error_exit(stacks);
+		clean_exit(stacks);
 	last = stacks->a[stacks->size_a - 1];
 	i = stacks->size_a - 1;
 	while (i > 0)
@@ -42,7 +42,7 @@ void	rrb(t_stacks	*stacks)
 	int	last;
 
 	if (!stacks || stacks->size_b < 2)
-		error_exit(stacks);
+		clean_exit(stacks);
 	last = stacks->b[stacks->size_b - 1];
 	i = stacks->size_b - 1;
 	while (i > 0)
@@ -61,7 +61,7 @@ void	rrr(t_stacks *stacks)
 	int	i;
 
 	if (!stacks || stacks->size_a < 2 || stacks->size_b < 2)
-		error_exit(stacks);
+		clean_exit(stacks);
 	last_a = stacks->a[stacks->size_a - 1];
 	last_b = stacks->b[stacks->size_b - 1];
 	i = stacks->size_a - 1;
