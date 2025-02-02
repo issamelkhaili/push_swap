@@ -12,23 +12,6 @@
 
 #include "push_swap.h"
 
-void	error_exit(t_stacks *stacks)
-{
-	if (stacks)
-		free_stacks(stacks);
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-void	free_stacks(t_stacks *stacks)
-{
-	if (stacks->a)
-		free(stacks->a);
-	if (stacks->b)
-		free(stacks->b);
-	free(stacks);
-}
-
 int	has_duplicates(int *array, int size)
 {
 	int	i;

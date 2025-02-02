@@ -12,14 +12,18 @@
 
 #include "push_swap.h"
 
-void	exit_error(t_stacks *stacks, char **split)
+void	exit_error()
 {
-	if (split)
-		free_split(split);
-	if (stacks)
-		free_stacks(stacks);
 	write(2, "Error\n", 6);
 	exit(1);
+}
+
+void  error_exit(t_stacks *stacks)
+{
+        if (stacks)
+           free_stacks(stacks);
+        write(2, "Error\n", 6);
+        exit(1);
 }
 
 void	clean_exit(t_stacks *stacks)
@@ -27,14 +31,6 @@ void	clean_exit(t_stacks *stacks)
 	if (stacks)
 		free_stacks(stacks);
 	exit(0);
-}
-
-void	split_error(char **split)
-{
-	if (split)
-		free_split(split);
-	write(2, "Error\n", 6);
-	exit(1);
 }
 
 void	error_free(char	*joined)
@@ -45,14 +41,11 @@ void	error_free(char	*joined)
 	exit(1);
 }
 
-void     free_split(char **split)
+void    free_stacks(t_stacks *stacks)
 {
-        int     i;
-
-        if (!split)
-                return ;
-        i = 0;
-        while (split[i])
-                free(split[i++]);
-        free(split);
+        if (stacks->a)
+           free(stacks->a);
+        if (stacks->b)
+           free(stacks->b);
+        free(stacks);
 }

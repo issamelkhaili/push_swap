@@ -11,8 +11,8 @@ int check_numbers(char *joined_arguments)
             i++;
         if (joined_arguments[i])
         {
-            if (ft_atol(joined_arguments + i) == 0)
-                return (0);
+            if (ft_atol(joined_arguments + i) == 2147483650)
+		    return (0);
             while (joined_arguments[i] && joined_arguments[i] != ' ')
                 i++;
         }
@@ -26,16 +26,16 @@ int main(int ac, char **av)
     int     i;
 
     if (!av || check_input(ac, av) == 0)
-        exit_error(NULL, NULL);
+        exit_error();
     if (ac < 2)
 	    exit (1);
     if (ac == 2)
 	    joined_arguments = ft_strdup(av[1]);
     else
 	    joined_arguments = join_arguments(ac, av);
-    //if (check_numbers(joined_arguments) == 0)
-//		error_free(joined_arguments);
-	write (1, "good", 4);
+
+     if (check_numbers(joined_arguments) == 0)
+		error_free(joined_arguments);
     free(joined_arguments);
 	return (0);
 }

@@ -59,12 +59,12 @@ void		rrr(t_stacks *stacks);
 void		sort_three(t_stacks *stacks);
 
 /* Memory Management Functions */
-void		exit_error(t_stacks *stacks, char **split);
+void		exit_error(void);
 void		clean_exit(t_stacks *stacks);
 void    	error_free(char *joined);
 void		split_error(char **split);
 void		free_stacks(t_stacks *stacks);
-void		free_split(char **split);
+void		error_exit(t_stacks *stacks);
 int    		check_input(int ac, char **av);
 int    		is_valid_argument(char *str);
 
