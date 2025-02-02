@@ -57,7 +57,7 @@ void		error_free(char *joined);
 void		free_stacks(t_stacks *stacks);
 void		error_exit(t_stacks *stacks);
 t_stacks	*init_stacks(int size);
-int     	fill_stack_a(char *str, t_stacks *stacks);
+int			fill_stack_a(char *str, t_stacks *stacks);
 
 /* Utility Functions */
 int			has_duplicates(int *array, int size);
