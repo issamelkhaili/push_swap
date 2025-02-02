@@ -1,24 +1,23 @@
 #include "push_swap.h"
 
-void    check_numbers(char *str)
+int check_numbers(char *joined_arguments)
 {
-    int i;
+    int     i;
 
     i = 0;
-    while (str[i])
+    while (joined_arguments[i])
     {
-        while (str[i] == ' ')
+        while (joined_arguments[i] == ' ')
             i++;
-        if (str[i])
+        if (joined_arguments[i])
         {
-            while (str[i] && str[i] != ' ')
-            {
-                write(1, &str[i], 1);
+            if (ft_atol(joined_arguments + i) == 0)
+                return (0);
+            while (joined_arguments[i] && joined_arguments[i] != ' ')
                 i++;
-            }
-            printf("\n");
         }
     }
+    return (1);
 }
 
 int main(int ac, char **av)
@@ -42,7 +41,9 @@ int main(int ac, char **av)
         if (!joined_arguments)
             exit_error(NULL, NULL);
     }
-	print_numbers(joined_arguments);
+	if (check_numbers(joined_arguments) == 0)
+		error_free(joined_arguments);
+	write (1, "good", 4);
     free(joined_arguments);
 	return (0);
 }
