@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 02:26:52 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/22 02:34:15 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/02 08:18:14 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
@@ -33,7 +34,8 @@ int		is_number(char *str);
 int		is_integer(char *str);
 int		is_space(char c);
 int		check_duplicates(int *arr, int size);
-char		*join_arguments(int ac, char **av);
+char	*join_arguments(int ac, char **av);
+long    ft_atol(const char *str);
 
 /* Split Functions */
 char		**ft_split(char	*s, char c);
@@ -71,6 +73,6 @@ size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
-int		ft_isdigit(int c);
+int			ft_isdigit(int c);
 
 #endif

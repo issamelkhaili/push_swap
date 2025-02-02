@@ -6,33 +6,39 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:12:55 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 03:43:31 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/02 08:18:39 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+long    ft_atol(const char *str)
 {
-	size_t	src_len;
-	size_t	i;
+    long    result;
+    int     sign;
+    int     i;
 
-	i = 0;
-	src_len = ft_strlen(src);
-	if (dstsize == 0)
-		return (src_len);
-	if (src[i] == '\0')
-	{
-		dst[i] = '\0';
-		return (0);
-	}
-	while (src[i] != '\0' && (i < dstsize - 1))
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (src_len);
+    result = 0;
+    sign = 1;
+    i = 0;
+
+    while (str[i] == ' ')
+        i++;
+    if (str[i] == '-' || str[i] == '+')
+    {
+        if (str[i] == '-')
+            sign = -1;
+        i++;
+    }
+    while (str[i] >= '0' && str[i] <= '9')
+    {
+        result = result * 10 + (str[i] - '0');
+        if ((sign == 1 && result > INT_MAX) ||
+            (sign == -1 && result > -(long)INT_MIN))
+            return (LONG_MAX);
+        i++;
+    }
+    return (result * sign);
 }
 
 int	ft_isdigit(int c)

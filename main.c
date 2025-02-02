@@ -1,24 +1,19 @@
 #include "push_swap.h"
 
-void    print_numbers(char *str)
+void    check_numbers(char *str)
 {
     int i;
 
     i = 0;
-    printf("Numbers found:\n");
     while (str[i])
     {
-        // Skip spaces
         while (str[i] == ' ')
             i++;
-        // If we're not at the end of string
         if (str[i])
         {
-            // Print from current char until we hit a space or end
-            printf("Sequence: ");
             while (str[i] && str[i] != ' ')
             {
-                printf("%c", str[i]);
+                write(1, &str[i], 1);
                 i++;
             }
             printf("\n");
@@ -29,17 +24,25 @@ void    print_numbers(char *str)
 int main(int ac, char **av)
 {
     char    *joined_arguments;
+    int     i;
+    char    **split;
 
-    if (ac < 2 || !av)
+    if (!av || check_input(ac, av) == 0)
         exit_error(NULL, NULL);
     
     if (ac == 2)
-         joined_arguments = ft_strdup(av[1]);
+    {
+        joined_arguments = ft_strdup(av[1]);
+        if (!joined_arguments)
+            exit_error(NULL, NULL);
+    }
     else
+    {
         joined_arguments = join_arguments(ac, av);
-    if (!joined_arguments)
-	    exit_error(NULL, NULL);
-    print_numbers(joined_arguments);
+        if (!joined_arguments)
+            exit_error(NULL, NULL);
+    }
+	print_numbers(joined_arguments);
     free(joined_arguments);
-    return (0);
+	return (0);
 }
