@@ -24,25 +24,17 @@ int main(int ac, char **av)
 {
     char    *joined_arguments;
     int     i;
-    char    **split;
 
     if (!av || check_input(ac, av) == 0)
         exit_error(NULL, NULL);
-    
+    if (ac < 2)
+	    exit (1);
     if (ac == 2)
-    {
-        joined_arguments = ft_strdup(av[1]);
-        if (!joined_arguments)
-            exit_error(NULL, NULL);
-    }
+	    joined_arguments = ft_strdup(av[1]);
     else
-    {
-        joined_arguments = join_arguments(ac, av);
-        if (!joined_arguments)
-            exit_error(NULL, NULL);
-    }
-	if (check_numbers(joined_arguments) == 0)
-		error_free(joined_arguments);
+	    joined_arguments = join_arguments(ac, av);
+    //if (check_numbers(joined_arguments) == 0)
+//		error_free(joined_arguments);
 	write (1, "good", 4);
     free(joined_arguments);
 	return (0);
