@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 		else if (stacks->size_a == 5)
 			sort_five(stacks);
 	}
-//	free_stacks(stacks);
+	free_stacks(stacks);
 //	print_stacks(stacks);
 	return (0);
 }
