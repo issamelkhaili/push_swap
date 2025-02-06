@@ -50,6 +50,7 @@ void		rrr(t_stacks *stacks);
 
 /* Sorting Functions */
 void		sort_three(t_stacks *stacks);
+void		sort_four(t_stacks *stacks);
 
 /* Memory Management Functions */
 void		exit_error(void);
@@ -62,6 +63,7 @@ int			fill_stack_a(char *str, t_stacks *stacks);
 
 /* Utility Functions */
 int			has_duplicates(int *array, int size);
+int			is_sorted(t_stacks *stacks);
 size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char *s1, char *s2);

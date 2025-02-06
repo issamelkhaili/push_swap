@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   sort_four.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,36 +12,42 @@
 
 #include "push_swap.h"
 
-static int	sort_two(t_stacks *stacks)
+static int	find_smallest_pos(t_stacks *stacks)
 {
-	if (stacks->size_a == 2)
+	int	smallest;
+	int	smallest_pos;
+	int	i;
+
+	smallest = stacks->a[0];
+	smallest_pos = 0;
+	i = 1;
+	while (i < stacks->size_a)
 	{
-		if (stacks->a[0] > stacks->a[1])
-			sa(stacks);
-		return (1);
+		if (stacks->a[i] < smallest)
+		{
+			smallest = stacks->a[i];
+			smallest_pos = i;
+		}
+		i++;
 	}
-	return (0);
+	return (smallest_pos);
 }
 
-void	sort_three(t_stacks *stacks)
+void	sort_four(t_stacks *stacks)
 {
-	if (sort_two(stacks) == 1)
-		return;
-	if (stacks->a[0] > stacks->a[1] && stacks->a[1] > stacks->a[2])
-	{
-		sa(stacks);
-		rra(stacks);
-	}
-	if (stacks->a[0] > stacks->a[1] && stacks->a[0] > stacks->a[2])
-		ra(stacks);
-	else if (stacks->a[1] > stacks->a[0] && stacks->a[1] > stacks->a[2])
-	{
-		sa(stacks);
-		ra(stacks);
-	}
-	else if (stacks->a[0] > stacks->a[2])
-		rra(stacks);
-	else if (stacks->a[1] < stacks->a[0])
-		sa(stacks);
-}
+	int	smallest_pos;
 
+	smallest_pos = find_smallest_pos(stacks);
+	if (smallest_pos == 1)
+		sa(stacks);
+	else if (smallest_pos == 2)
+	{
+		ra(stacks);
+		ra(stacks);
+	}
+	else if (smallest_pos == 3)
+		rra(stacks);
+	pb(stacks);
+	sort_three(stacks);
+	pa(stacks);
+}

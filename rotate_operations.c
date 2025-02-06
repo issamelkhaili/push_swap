@@ -12,12 +12,6 @@
 
 #include "push_swap.h"
 
-static void	exitandprint(void)
-{
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
 void	rb(t_stacks *stacks)
 {
 	int	first;

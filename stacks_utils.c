@@ -37,7 +37,7 @@ t_stacks	*init_stacks(int size)
 	t_stacks	*stacks;
 
 	if (size < 1)
-		error_exit(stacks);
+		exit_error();
 	stacks = malloc(sizeof(t_stacks));
 	if (!stacks)
 		error_exit(stacks);
@@ -69,5 +69,19 @@ int	fill_stack_a(char *str, t_stacks *stacks)
 	}
 	stacks->size_a = index;
 	stacks->size_b = 0;
+	return (1);
+}
+
+int	is_sorted(t_stacks *stacks)
+{
+	int	i;
+
+	i = 0;
+	while (i < stacks->size_a - 1)
+	{
+		if (stacks->a[i] > stacks->a[i + 1])
+			return (0);
+		i++;
+	}
 	return (1);
 }
