@@ -33,7 +33,7 @@ char		*join_arguments(int ac, char **av);
 int			check_input(int ac, char **av);
 int			is_valid_argument(char *str);
 long		ft_atol(const char *str);
-t_stacks        *parse_input(int ac, char **av);
+t_stacks	*parse_input(int ac, char **av);
 
 /* Stack Operations */
 void		sa(t_stacks *stacks);
