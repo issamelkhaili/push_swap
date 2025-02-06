@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_four.c                                        :+:      :+:    :+:   */
+/*   sort_three.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	sort_four(t_stacks *stacks)
+void	sort_five(t_stacks *stacks)
 {
 	int	smallest_pos;
 
@@ -25,8 +25,21 @@ void	sort_four(t_stacks *stacks)
 		ra(stacks);
 	}
 	else if (smallest_pos == 3)
+	{
+		ra(stacks);
+		ra(stacks);
+		ra(stacks);
+	}
+	else if (smallest_pos == 4)
+	{
 		rra(stacks);
+	}
 	pb(stacks);
-	sort_three(stacks);
+	sort_four(stacks);
 	pa(stacks);
 }
+
+
+
+
+

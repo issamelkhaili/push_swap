@@ -62,9 +62,15 @@ t_stacks	*parse_input(int ac, char **av)
 		error_free(joined_arguments);
 	stacks = init_stacks(count);
 	if (!fill_stack_a(joined_arguments, stacks))
+	{
+		free(joined_arguments);
 		error_exit(stacks);
+	}
 	if (has_duplicates(stacks->a, stacks->size_a))
+	{
+		free(joined_arguments);
 		error_exit(stacks);
+	}
 	free(joined_arguments);
 	return (stacks);
 }

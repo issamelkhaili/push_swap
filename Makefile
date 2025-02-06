@@ -26,8 +26,11 @@ SRCS = main.c \
 	rotate_operations.c \
 	sort_three.c \
 	sort_four.c \
+	sort_five.c \
+	sorting_utils.c \
 	stacks_utils.c \
 	swap_operations.c
+
 
 OBJS = $(SRCS:.c=.o)
 

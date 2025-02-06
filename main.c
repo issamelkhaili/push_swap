@@ -48,8 +48,10 @@ int	main(int ac, char **av)
 			sort_three(stacks);
 		else if (stacks->size_a == 4)
 			sort_four(stacks);
+		else if (stacks->size_a == 5)
+			sort_five(stacks);
 	}
-	//free_stacks(stacks);
-	print_stacks(stacks);
+//	free_stacks(stacks);
+//	print_stacks(stacks);
 	return (0);
 }

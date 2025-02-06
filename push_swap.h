@@ -28,14 +28,12 @@ typedef struct s_stacks
 	int	size_b;
 }	t_stacks;
 
-/* Parsing Functions */
 char		*join_arguments(int ac, char **av);
 int			check_input(int ac, char **av);
 int			is_valid_argument(char *str);
 long		ft_atol(const char *str);
 t_stacks	*parse_input(int ac, char **av);
 
-/* Stack Operations */
 void		sa(t_stacks *stacks);
 void		sb(t_stacks *stacks);
 void		ss(t_stacks *stacks);
@@ -48,11 +46,11 @@ void		rra(t_stacks *stacks);
 void		rrb(t_stacks *stacks);
 void		rrr(t_stacks *stacks);
 
-/* Sorting Functions */
 void		sort_three(t_stacks *stacks);
 void		sort_four(t_stacks *stacks);
+int      	find_smallest_pos(t_stacks *stacks);
+void    	sort_five(t_stacks *stacks);
 
-/* Memory Management Functions */
 void		exit_error(void);
 void		clean_exit(t_stacks *stacks);
 void		error_free(char *joined);
@@ -61,7 +59,6 @@ void		error_exit(t_stacks *stacks);
 t_stacks	*init_stacks(int size);
 int			fill_stack_a(char *str, t_stacks *stacks);
 
-/* Utility Functions */
 int			has_duplicates(int *array, int size);
 int			is_sorted(t_stacks *stacks);
 size_t		ft_strlen(const char *s);
