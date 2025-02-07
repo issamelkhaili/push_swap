@@ -30,7 +30,7 @@ void	rra(t_stacks *stacks)
 	write(1, "rra\n", 4);
 }
 
-void	rrb(t_stacks	*stacks)
+void	rrb(t_stacks *stacks)
 {
 	int	i;
 	int	last;

@@ -26,19 +26,24 @@ static int	sort_two(t_stacks *stacks)
 void	sort_three(t_stacks *stacks)
 {
 	if (sort_two(stacks) == 1)
-		return;
-	if (stacks->a[0] > stacks->a[1] && stacks->a[1] > stacks->a[2] && stacks->a[0] > stacks->a[2])
+		return ;
+	if (stacks->a[0] > stacks->a[1] && stacks->a[1] > stacks->a[2]
+		&& stacks->a[0] > stacks->a[2])
 	{
 		sa(stacks);
 		rra(stacks);
 	}
-	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] < stacks->a[2] && stacks->a[0] > stacks->a[2])
+	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] < stacks->a[2]
+		&& stacks->a[0] > stacks->a[2])
 		ra(stacks);
-	else if (stacks->a[0] < stacks->a[1] && stacks->a[1] >  stacks->a[2] && stacks->a[0]>stacks->a[2])
+	else if (stacks->a[0] < stacks->a[1] && stacks->a[1] > stacks->a[2]
+		&& stacks->a[0] > stacks->a[2])
 		rra(stacks);
-	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] < stacks->a[2] && stacks->a[0] < stacks->a[2])
+	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] < stacks->a[2]
+		&& stacks->a[0] < stacks->a[2])
 		sa(stacks);
-	else if (stacks->a[0] < stacks->a[1] && stacks->a[1] > stacks->a[2] && stacks->a[0] < stacks->a[2])
+	else if (stacks->a[0] < stacks->a[1] && stacks->a[1] > stacks->a[2]
+		&& stacks->a[0] < stacks->a[2])
 	{
 		sa(stacks);
 		ra(stacks);

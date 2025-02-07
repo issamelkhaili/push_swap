@@ -13,20 +13,20 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
 typedef struct s_stacks
 {
-	int	*a;
-	int	*b;
-	int	size_a;
-	int	size_b;
-}	t_stacks;
+	int		*a;
+	int		*b;
+	int		size_a;
+	int		size_b;
+}			t_stacks;
 
 char		*join_arguments(int ac, char **av);
 int			check_input(int ac, char **av);
@@ -48,8 +48,8 @@ void		rrr(t_stacks *stacks);
 
 void		sort_three(t_stacks *stacks);
 void		sort_four(t_stacks *stacks);
-int      	find_smallest_pos(t_stacks *stacks);
-void    	sort_five(t_stacks *stacks);
+int			find_smallest_pos(t_stacks *stacks);
+void		sort_five(t_stacks *stacks);
 
 void		exit_error(void);
 void		clean_exit(t_stacks *stacks);

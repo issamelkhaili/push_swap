@@ -14,7 +14,7 @@
 
 void	pa(t_stacks *stacks)
 {
-	int		i;
+	int	i;
 
 	if (!stacks || stacks->size_b < 1)
 		clean_exit(stacks);
@@ -31,8 +31,8 @@ void	pa(t_stacks *stacks)
 		stacks->b[i] = stacks->b[i + 1];
 		i++;
 	}
-	stacks-> size_b--;
-	stacks-> size_a++;
+	stacks->size_b--;
+	stacks->size_a++;
 	write(1, "pa\n", 3);
 }
 

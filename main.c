@@ -42,7 +42,7 @@ int	main(int ac, char **av)
 	stacks = parse_input(ac, av);
 	if (!stacks)
 		exit_error();
-	if(!is_sorted(stacks))
+	if (!is_sorted(stacks))
 	{
 		if (stacks->size_a == 2 || stacks->size_a == 3)
 			sort_three(stacks);
@@ -52,6 +52,6 @@ int	main(int ac, char **av)
 			sort_five(stacks);
 	}
 	free_stacks(stacks);
-//	print_stacks(stacks);
+	print_stacks(stacks);
 	return (0);
 }

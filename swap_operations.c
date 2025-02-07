@@ -36,11 +36,11 @@ void	sb(t_stacks *stacks)
 	write(1, "sb\n", 3);
 }
 
-void	ss(t_stacks	*stacks)
+void	ss(t_stacks *stacks)
 {
 	int	temp;
 
-	if (!stacks || stacks->size_b < 2 || stacks-> size_a < 2)
+	if (!stacks || stacks->size_b < 2 || stacks->size_a < 2)
 		clean_exit(stacks);
 	temp = stacks->b[0];
 	stacks->b[0] = stacks->b[1];

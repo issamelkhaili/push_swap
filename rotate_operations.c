@@ -21,7 +21,7 @@ void	rb(t_stacks *stacks)
 		clean_exit(stacks);
 	first = stacks->b[0];
 	i = 0;
-	while (i < stacks->size_b -1)
+	while (i < stacks->size_b - 1)
 	{
 		stacks->b[i] = stacks->b[i + 1];
 		i++;
