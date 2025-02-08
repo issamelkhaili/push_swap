@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/08 15:00:10 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:26:11 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,63 @@ static int	calculate_chunk(int size)
 	else if (size <= 500)
 		return (30);
 	return (45);
+}
+
+static int	find_next_in_chunk(t_stacks *stacks, int min, int max)
+{
+	int	i;
+
+	i = 0;
+	while (i < stacks->size_a)
+	{
+		if (stacks->a[i] >= min && stacks->a[i] <= max)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+static void	push_to_b(t_stacks *stacks, int pos)
+{
+	if (pos <= stacks->size_a / 2)
+	{
+		while (pos > 0)
+		{
+			ra(stacks);
+			pos--;
+		}
+	}
+	else
+	{
+		while (pos < stacks->size_a)
+		{
+			rra(stacks);
+			pos++;
+		}
+	}
+	pb(stacks);
+}
+
+static void	push_chunks_to_b(t_stacks *stacks, int chunk_size)
+{
+	int	chunk;
+	int	min;
+	int	max;
+	int	pos;
+	int	total_elements;
+
+	chunk = 0;
+	total_elements = stacks->size_a;
+	while (stacks->size_a > 0)
+	{
+		min = chunk * chunk_size;
+		max = ((chunk + 1) * chunk_size) - 1;
+		if (max >= total_elements)
+			max = total_elements - 1;
+		while ((pos = find_next_in_chunk(stacks, min, max)) != -1)
+			push_to_b(stacks, pos);
+		chunk++;
+	}
 }
 
 static void	push_back_to_a(t_stacks *stacks)
@@ -48,36 +105,6 @@ static void	push_back_to_a(t_stacks *stacks)
 			while (max_pos++ < stacks->size_b)
 				rrb(stacks);
 		pa(stacks);
-	}
-}
-
-static void	push_chunks_to_b(t_stacks *stacks, int chunk_size)
-{
-	int	min;
-	int	max;
-	int	chunk;
-	int	pushed;
-
-	chunk = 0;
-	pushed = 0;
-	while (stacks->size_a > 0)
-	{
-		min = chunk * chunk_size;
-		max = (chunk + 1) * chunk_size - 1;
-		if (stacks->size_a - pushed < chunk_size)
-			max = stacks->size_a - 1;
-		while (pushed < (chunk + 1) * chunk_size && stacks->size_a > 0)
-		{
-			if (stacks->a[0] >= min && stacks->a[0] <= max)
-			{
-				pb(stacks);
-				pushed++;
-			}
-			else
-				ra(stacks);
-		}
-		if (stacks->size_a > 0)
-			chunk++;
 	}
 }
 

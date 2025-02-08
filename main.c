@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/08 15:02:02 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:24:50 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,13 @@ void	print_stacks(t_stacks *stacks)
 	printf("-----------------\n\n");
 }
 
-int	main(int ac, char **av)
+static void	sort_stack(t_stacks *stacks)
 {
-	t_stacks	*stacks;
-
-	stacks = parse_input(ac, av);
-	if (!stacks)
-		exit_error();
 	if (!is_sorted(stacks))
 	{
-		if (stacks->size_a == 2 || stacks->size_a == 3)
+		if (stacks->size_a == 2)
+			sort_three(stacks);
+		else if (stacks->size_a == 3)
 			sort_three(stacks);
 		else if (stacks->size_a == 4)
 			sort_four(stacks);
@@ -53,7 +50,19 @@ int	main(int ac, char **av)
 		else
 			sort_big(stacks);
 	}
-	print_stacks(stacks);
-	free(stacks);
+}
+
+int	main(int ac, char **av)
+{
+	t_stacks	*stacks;
+
+	if (ac < 2)
+		return (0);
+	stacks = parse_input(ac, av);
+	if (!stacks)
+		exit_error();
+	sort_stack(stacks);
+	if (stacks)
+		free_stacks(stacks);
 	return (0);
 }
