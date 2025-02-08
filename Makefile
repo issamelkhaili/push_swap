@@ -6,7 +6,7 @@
 #    By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/06 10:00:00 by isel-kha          #+#    #+#             #
-#    Updated: 2025/02/08 14:51:22 by isel-kha         ###   ########.fr        #
+#    Updated: 2025/02/08 15:04:25 by isel-kha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ SRCS = main.c \
 	sort_five.c \
 	sorting_utils.c \
 	stacks_utils.c \
-	swap_operations.c
+	swap_operations.c \
+	index_utils.c \
+	sort_big.c
 
 
 OBJS = $(SRCS:.c=.o)

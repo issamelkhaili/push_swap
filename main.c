@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/08 14:49:40 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:02:02 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	main(int ac, char **av)
 			sort_four(stacks);
 		else if (stacks->size_a == 5)
 			sort_five(stacks);
+		else
+			sort_big(stacks);
 	}
 	print_stacks(stacks);
 	free(stacks);
