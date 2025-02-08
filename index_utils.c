@@ -12,36 +12,25 @@
 
 #include "push_swap.h"
 
-static int	find_min(t_stacks *stacks)
-{
-	int	i;
-	int	min;
-
-	i = 0;
-	min = stacks->a[0];
-	while (i < stacks->size_a)
-	{
-		if (stacks->a[i] < min)
-			min = stacks->a[i];
-		i++;
-	}
-	return (min);
-}
-
-static int	find_max(t_stacks *stacks)
+static int	find_max_pos(t_stacks *stacks)
 {
 	int	i;
 	int	max;
+	int	max_pos;
 
-	i = 0;
+	i = 1;
 	max = stacks->a[0];
+	max_pos = 0;
 	while (i < stacks->size_a)
 	{
 		if (stacks->a[i] > max)
+		{
 			max = stacks->a[i];
+			max_pos = i;
+		}
 		i++;
 	}
-	return (max);
+	return (max_pos);
 }
 
 static void	set_index(t_stacks *stacks, int *temp, int i)
@@ -64,8 +53,8 @@ void	index_stack(t_stacks *stacks)
 {
 	int	*temp;
 	int	i;
-	int	min;
-	int	max;
+	int	min_pos;
+	int	max_pos;
 
 	temp = malloc(sizeof(int) * stacks->size_a);
 	if (!temp)
@@ -73,14 +62,14 @@ void	index_stack(t_stacks *stacks)
 	i = -1;
 	while (++i < stacks->size_a)
 		temp[i] = stacks->a[i];
-	min = find_min(stacks);
-	max = find_max(stacks);
+	min_pos = find_smallest_pos(stacks);
+	max_pos = find_max_pos(stacks);
 	i = -1;
 	while (++i < stacks->size_a)
 	{
-		if (stacks->a[i] == min)
+		if (i == min_pos)
 			stacks->a[i] = 0;
-		else if (stacks->a[i] == max)
+		else if (i == max_pos)
 			stacks->a[i] = stacks->size_a - 1;
 		else
 			set_index(stacks, temp, i);
