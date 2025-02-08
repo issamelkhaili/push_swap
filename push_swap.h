@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 02:26:52 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/08 15:04:09 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:25:03 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			find_smallest_pos(t_stacks *stacks);
 void		sort_five(t_stacks *stacks);
 void    	index_stack(t_stacks *stacks);
 void    	sort_big(t_stacks *stacks);
+int     calculate_optimal_chunk(t_stacks *stacks);
 
 void		exit_error(void);
 void		clean_exit(t_stacks *stacks);
