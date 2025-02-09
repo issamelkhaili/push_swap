@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/08 17:28:10 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:26:23 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	calculate_chunk(int size)
 {
 	if (size <= 130)
-		return (100);
+		return (size / 5);
 	else if (size > 130 && size <= 230)
 		return (35);
 	return (45);
@@ -81,8 +81,7 @@ void	sort_big(t_stacks *stacks)
 	int	chunk_size;
 
 	index_stack(stacks);
-	chunk_size = calculate_optimal_chunk(stacks);
-	calculate_chunk(stacks->size_a);
+	chunk_size = calculate_chunk(stacks->size_a);
 	push_chunks_to_b(stacks, chunk_size);
 	push_back_to_a(stacks);
 }
