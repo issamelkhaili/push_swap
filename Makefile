@@ -1,55 +1,44 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/06 10:00:00 by isel-kha          #+#    #+#             #
-#    Updated: 2025/02/09 17:25:19 by isel-kha         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME	= push_swap
 
-NAME = push_swap
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+SRCS	= main.c \
+		  operations/reverse_rotate_operation.c \
+		  operations/rotate_operations.c \
+		  operations/swap_operations.c \
+		  operations/push_operations.c \
+		  parsing/stacks_utils.c \
+		  parsing/parsing_utils.c \
+		  parsing/parsing.c \
+		  parsing/check_input.c \
+		  parsing/libft_utils.c \
+		  parsing/return_error.c \
+		  sort/sort_three.c \
+		  sort/sort_big.c \
+		  sort/sorting_utils.c \
+		  sort/index_utils.c \
+		  sort/sort_four.c \
+		  sort/sort_five.c
 
-SRCS = main.c \
-	check_input.c \
-	libft_utils.c \
-	parcing.c \
-	parsing_utils.c \
-	push_operations.c \
-	return_error.c \
-	reverse_rotate_operation.c \
-	rotate_operations.c \
-	sort_three.c \
-	sort_four.c \
-	sort_five.c \
-	sorting_utils.c \
-	stacks_utils.c \
-	swap_operations.c \
-	index_utils.c \
-	sort_big.c \
+OBJS	= $(SRCS:.c=.o)
 
+INCS	= -I .
 
-OBJS = $(SRCS:.c=.o)
+all:	$(NAME)
 
-all: $(NAME)
+$(NAME):	$(OBJS)
+	$(CC) $(CFLAGS) $(INCS) $(OBJS) -o $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-
-%.o: %.c push_swap.h
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o:	%.c
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
 
-fclean: clean
+fclean:	clean
 	rm -f $(NAME)
 
-re: fclean all
+re:	fclean all
 
-.PHONY: all clean fclean re
+.PHONY:	all clean fclean re
