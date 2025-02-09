@@ -1,198 +1,149 @@
 #!/bin/bash
 
-# Colors and formatting
-BLACK='\033[0;30m'
+# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
+YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
+MAGENTA='\033[0;35m'
 CYAN='\033[0;36m'
-WHITE='\033[1;37m'
-BOLD='\033[1m'
-DIM='\033[2m'
-ITALIC='\033[3m'
-UNDERLINE='\033[4m'
-NC='\033[0m'
+RESET='\033[0m'
 
-# Tracking variables
-WORST_MOVES=0
-WORST_PATTERN=""
-TOTAL_TESTS=0
-FAILED_TESTS=0
-START_TIME=$(date +%s)
-LOG_FILE="test_log.txt"
+# Configuration
+MAX_MOVES=700
+PUSH_SWAP="./push_swap"
+CHECKER="./checker_linux"
+WORST_CASE=0
+TOTAL_MOVES=0
+TEST_COUNT=0
+FAILED_COUNT=0
+LOG_FILE="push_swap_failed_cases.log"
 
-# Initialize log file
-echo "Push_swap Test Results - $(date)" > $LOG_FILE
-echo "================================" >> $LOG_FILE
+# Clear previous log file
+> "$LOG_FILE"
 
+# ASCII Art Banner
 print_banner() {
-    clear
-    echo -e "${BLUE}${BOLD}"
+    echo -e "${CYAN}"
     echo "██████╗ ██╗   ██╗███████╗██╗  ██╗    ███████╗██╗    ██╗ █████╗ ██████╗"
     echo "██╔══██╗██║   ██║██╔════╝██║  ██║    ██╔════╝██║    ██║██╔══██╗██╔══██╗"
     echo "██████╔╝██║   ██║███████╗███████║    ███████╗██║ █╗ ██║███████║██████╔╝"
     echo "██╔═══╝ ██║   ██║╚════██║██╔══██║    ╚════██║██║███╗██║██╔══██║██╔═══╝"
     echo "██║     ╚██████╔╝███████║██║  ██║    ███████║╚███╔███╔╝██║  ██║██║"
     echo "╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝    ╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝"
-    echo -e "${NC}"
-    echo -e "${CYAN}${BOLD}                     MEGA EVIL PATTERN TESTER${NC}"
-    echo -e "${DIM}                        by isel-kha @ 42${NC}"
-    echo
+    echo "                     MEGA EVIL PATTERN TESTER"
+    echo "                        by isel-kha @ 42"
+    echo -e "${RESET}"
 }
 
-show_progress() {
-    local current=$1
-    local total=$2
-    local width=50
-    local percentage=$((current * 100 / total))
-    local completed=$((width * current / total))
-    
-    printf "\r${YELLOW}Progress: [${NC}"
-    for ((i = 0; i < completed; i++)); do printf "█"; done
-    for ((i = completed; i < width; i++)); do printf "░"; done
-    printf "${YELLOW}] %d%%${NC}" $percentage
+# Check if required programs exist
+check_requirements() {
+    if [ ! -f "$PUSH_SWAP" ]; then
+        echo -e "${RED}Error: push_swap executable not found${RESET}"
+        exit 1
+    fi
+    if [ ! -f "$CHECKER" ]; then
+        echo -e "${YELLOW}Warning: checker_linux not found, will skip correctness verification${RESET}"
+    fi
+    chmod +x "$PUSH_SWAP" 2>/dev/null
+    chmod +x "$CHECKER" 2>/dev/null
 }
 
-test_pattern() {
-    local name=$1
-    local arg=$2
+# Log failed test case
+log_failed_case() {
+    local sequence="$1"
+    local test_name="$2"
+    local moves="$3"
+    local reason="$4"
     
-    ((TOTAL_TESTS++))
-    show_progress $TOTAL_TESTS 1000
+    echo "====================" >> "$LOG_FILE"
+    echo "Failed Test: $test_name" >> "$LOG_FILE"
+    echo "Moves: $moves" >> "$LOG_FILE"
+    echo "Reason: $reason" >> "$LOG_FILE"
+    echo "Sequence: $sequence" >> "$LOG_FILE"
+    echo "Time: $(date)" >> "$LOG_FILE"
+    echo "====================" >> "$LOG_FILE"
+    echo "" >> "$LOG_FILE"
+}
+
+# Test a single sequence
+test_sequence() {
+    local sequence="$1"
+    local test_name="$2"
+    local moves=0
+    local result="OK"
     
-    # Run push_swap and checker
-    local output=$(./push_swap $arg 2>/dev/null)
-    if [ $? -ne 0 ]; then
-        echo -e "\n${RED}Error: push_swap failed to execute${NC}"
-        return
+    # Run push_swap and count moves
+    moves=$(./push_swap $sequence 2>/dev/null | wc -l)
+    
+    # Update statistics
+    ((TEST_COUNT++))
+    ((TOTAL_MOVES += moves))
+    if [ $moves -gt $WORST_CASE ]; then
+        WORST_CASE=$moves
     fi
     
-    local moves=$(echo "$output" | wc -l | tr -d ' ')
-    local result=$(echo "$output" | ./checker_linux $arg 2>/dev/null)
+    # Verify sorting if checker exists
+    if [ -f "$CHECKER" ]; then
+        result=$(./push_swap $sequence 2>/dev/null | ./checker_linux $sequence 2>/dev/null)
+    fi
+
+    # Print results with progress indicator
+    printf "Test %3d: %-20s" "$TEST_COUNT" "$test_name"
+    if [ "$result" != "OK" ]; then
+        echo -e "${RED}❌ Failed (incorrect sorting)${RESET}"
+        log_failed_case "$sequence" "$test_name" "$moves" "Incorrect sorting"
+        ((FAILED_COUNT++))
+    elif [ $moves -gt $MAX_MOVES ]; then
+        echo -e "${RED}❌ Failed ($moves moves > $MAX_MOVES)${RESET}"
+        log_failed_case "$sequence" "$test_name" "$moves" "Too many moves ($moves > $MAX_MOVES)"
+        ((FAILED_COUNT++))
+    else
+        echo -e "${GREEN}✓ Passed ($moves moves)${RESET}"
+    fi
+}
+
+# Process test patterns from the files
+process_patterns() {
+    local section=""
+    local pattern=""
+    local section_count=0
     
-    # Update worst case
-    if [ "$moves" -gt "$WORST_MOVES" ]; then
-        WORST_MOVES=$moves
-        WORST_PATTERN="$arg"
-        echo -e "\n${RED}${BOLD}New worst case found: $moves moves!${NC}"
+    while IFS= read -r line; do
+        # Skip empty lines
+        [[ -z "$line" ]] && continue
         
-        # Log worst case
-        echo -e "\nNew Worst Case Found:" >> $LOG_FILE
-        echo "Pattern: $name" >> $LOG_FILE
-        echo "Moves: $moves" >> $LOG_FILE
-        echo "Numbers: $arg" >> $LOG_FILE
-        echo "------------------------" >> $LOG_FILE
-    fi
-    
-    # Count failures
-    if [ "$moves" -gt 700 ]; then
-        ((FAILED_TESTS++))
-    fi
-    
-    # Log test
-    echo "Test #$TOTAL_TESTS: $name" >> $LOG_FILE
-    echo "Moves: $moves" >> $LOG_FILE
-    echo "Result: $result" >> $LOG_FILE
-    echo "-------------------" >> $LOG_FILE
-}
-
-generate_evil_patterns() {
-    # Original evil pattern
-    local EVIL="94 98 97 96 95 99 93 92 91 90 84 88 87 86 85 89 83 82 81 80 74 78 77 76 75 79 73 72 71 70 64 68 67 66 65 69 63 62 61 60 54 58 57 56 55 59 53 52 51 50 44 48 47 46 45 49 43 42 41 40 34 38 37 36 35 39 33 32 31 30 24 28 27 26 25 29 23 22 21 20 14 18 17 16 15 19 13 12 11 10 4 8 7 6 5 9 3 2 1 0"
-    test_pattern "Original Evil Pattern" "$EVIL"
-    
-    # Generate variations using Python
-    for ((i=1; i<=50; i++)); do
-        # Multi-level swaps
-        ARG=$(python3 -c "
-import random
-nums = list(range(99, -1, -1))
-for j in range(0, 98, 2):
-    if random.random() < 0.7:
-        nums[j], nums[j+1] = nums[j+1], nums[j]
-for j in range(0, 96, 4):
-    if random.random() < 0.5:
-        nums[j:j+2], nums[j+2:j+4] = nums[j+2:j+4], nums[j:j+2]
-for j in range(5):
-    a, b = random.sample(range(100), 2)
-    nums[a], nums[b] = nums[b], nums[a]
-print(' '.join(map(str, nums)))")
-        test_pattern "Multi-level Pattern $i" "$ARG"
-
-        # Wave pattern
-        ARG=$(python3 -c "
-import random
-nums = list(range(99, -1, -1))
-for j in range(0, 90, 10):
-    if random.random() < 0.8:
-        section = nums[j:j+10]
-        mid = len(section)//2
-        section[:mid], section[mid:] = section[mid:], section[:mid]
-        if random.random() < 0.6:
-            a, b = random.sample(range(len(section)), 2)
-            section[a], section[b] = section[b], section[a]
-        nums[j:j+10] = section
-print(' '.join(map(str, nums)))")
-        test_pattern "Wave Pattern $i" "$ARG"
-
-        # Strategic reverse
-        ARG=$(python3 -c "
-import random
-nums = list(range(99, -1, -1))
-step = random.randint(5, 15)
-for j in range(0, 100-step, step):
-    if random.random() < 0.7:
-        nums[j], nums[j+step-1] = nums[j+step-1], nums[j]
-        if random.random() < 0.5:
-            mid = j + step//2
-            if mid+1 < len(nums):
-                nums[mid], nums[mid+1] = nums[mid+1], nums[mid]
-print(' '.join(map(str, nums)))")
-        test_pattern "Strategic Reverse $i" "$ARG"
+        # Handle section headers
+        if [[ "$line" =~ ^#.*Section ]]; then
+            section=$(echo "$line" | sed 's/^#[[:space:]]*Section[[:space:]]*\([0-9]*\).*/\1/')
+            echo -e "\n${CYAN}Testing Section $section Patterns${RESET}"
+            continue
+        fi
+        
+        # Skip other comments
+        [[ "$line" =~ ^#.* ]] && continue
+        
+        # Process pattern if it looks valid (contains numbers)
+        if [[ "$line" =~ [0-9] ]]; then
+            test_sequence "$line" "Section ${section:-Unknown} Pattern"
+        fi
     done
-}
-
-print_summary() {
-    local end_time=$(date +%s)
-    local total_time=$((end_time - START_TIME))
-    
-    clear
-    print_banner
-    
-    echo -e "${PURPLE}${BOLD}Test Results Summary${NC}"
-    echo -e "${DIM}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${WHITE}Total tests run:     ${YELLOW}$TOTAL_TESTS${NC}"
-    echo -e "${WHITE}Failed tests:        ${RED}$FAILED_TESTS${NC}"
-    echo -e "${WHITE}Pass rate:           ${GREEN}$(( (TOTAL_TESTS - FAILED_TESTS) * 100 / TOTAL_TESTS ))%${NC}"
-    echo -e "${WHITE}Worst case moves:    ${RED}$WORST_MOVES${NC}"
-    echo -e "${WHITE}Total time:          ${YELLOW}${total_time}s${NC}"
-    
-    echo -e "\n${PURPLE}${BOLD}Worst Case Pattern${NC}"
-    echo -e "${DIM}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${WHITE}$WORST_PATTERN${NC}"
-    
-    echo -e "\n${GREEN}${BOLD}Detailed results have been saved to $LOG_FILE${NC}"
 }
 
 # Main execution
 print_banner
-echo -e "${YELLOW}Starting comprehensive push_swap testing...${NC}\n"
+check_requirements
 
-# Check for push_swap and checker
-if [ ! -f "./push_swap" ]; then
-    echo -e "${RED}Error: push_swap not found in current directory${NC}"
+# Process all pattern files
+echo -e "${CYAN}Starting comprehensive evil pattern testing...${RESET}\n"
+
+# Check if pattern files exist
+if ! ls evil-patterns*.md 1> /dev/null 2>&1; then
+    echo -e "${RED}Error: No pattern files found (evil-patterns*.md)${RESET}"
     exit 1
 fi
 
-if [ ! -f "./checker_linux" ]; then
-    echo -e "${RED}Error: checker not found in current directory${NC}"
-    exit 1
-fi
+# Process all MD files
+cat evil-patterns*.md | process_patterns
 
-# Run tests
-generate_evil_patterns
-
-# Show final results
-print_summary
+exit $((FAILED_COUNT > 0))
