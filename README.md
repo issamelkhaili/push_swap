@@ -65,7 +65,7 @@ Feel free to submit issues and enhancement requests!
 
 ## Author
 
-- [@elkhailiissam](https://github.com/elkhailiissam)
+- [@elkhailiissam](https://github.com/issamelkhaili)
 
 ## Acknowledgments
 
