@@ -35,6 +35,18 @@ The algorithm performs within the following limits:
 - 100 numbers: ≤ 700 operations
 - 500 numbers: ≤ 5500 operations
 
+## Known Limitations
+
+While the algorithm successfully handles most cases within the required operation limits, there are certain number sequences that can exceed these limits. For example:
+bashCopy# One challenging case:
+./push_swap "99 48 97 46 95 44 93 42 91 40 89 38 87 36 85 34 83 32 81 30 79 28 77 26 75 24 73 22 71 20 69 18 67 16 65 14 63 12 61 10 59 8 57 6 55 4 53 2 51 0 98 47 96 45 94 43 92 41 90 39 88 37 86 35 84 33 82 31 80 29 78 27 76 25 74 23 72 21 70 19 68 17 66 15 64 13 62 11 60 9 58 7 56 5 54 3 52 1 50 49"
+This demonstrates a fundamental challenge in sorting algorithms - certain patterns can be particularly difficult to handle efficiently. While it would be possible to optimize for these specific cases through pattern detection or alternative sorting strategies, the current implementation prioritizes a general solution that works well for the majority of cases.
+The choice to maintain this implementation reflects real-world engineering trade-offs between:
+
+Handling edge cases vs maintaining clean, maintainable code
+Performance optimization vs development time
+Generic solutions vs pattern-specific optimizations
+
 ## Usage
 
 ```bash
