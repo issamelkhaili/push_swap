@@ -17,7 +17,7 @@ static int	sort_two(t_stacks *stacks)
 	if (stacks->size_a == 2)
 	{
 		if (stacks->a[0] > stacks->a[1])
-			sa(stacks);
+			sa_bonus(stacks);
 		return (1);
 	}
 	return (0);
@@ -30,22 +30,22 @@ void	sort_three(t_stacks *stacks)
 	if (stacks->a[0] > stacks->a[1] && stacks->a[1] > stacks->a[2]
 		&& stacks->a[0] > stacks->a[2])
 	{
-		sa(stacks);
-		rra(stacks);
+		sa_bonus(stacks);
+		rra_bonus(stacks);
 	}
 	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] < stacks->a[2]
 		&& stacks->a[0] > stacks->a[2])
-		ra(stacks);
+		ra_bonus(stacks);
 	else if (stacks->a[0] < stacks->a[1] && stacks->a[1] > stacks->a[2]
 		&& stacks->a[0] > stacks->a[2])
-		rra(stacks);
+		rra_bonus(stacks);
 	else if (stacks->a[0] > stacks->a[1] && stacks->a[1] < stacks->a[2]
 		&& stacks->a[0] < stacks->a[2])
-		sa(stacks);
+		sa_bonus(stacks);
 	else if (stacks->a[0] < stacks->a[1] && stacks->a[1] > stacks->a[2]
 		&& stacks->a[0] < stacks->a[2])
 	{
-		sa(stacks);
-		ra(stacks);
+		sa_bonus(stacks);
+		ra_bonus(stacks);
 	}
 }

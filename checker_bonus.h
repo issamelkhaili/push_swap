@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/12 11:51:02 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:19:18 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ typedef struct s_stacks
 	int		size_b;
 }			t_stacks;
 
-void		sa(t_stacks *stacks);
-void		sb(t_stacks *stacks);
-void		ss(t_stacks *stacks);
-void		pa(t_stacks *stacks);
-void		pb(t_stacks *stacks);
-void		ra(t_stacks *stacks);
-void		rb(t_stacks *stacks);
-void		rr(t_stacks *stacks);
-void		rra(t_stacks *stacks);
-void		rrb(t_stacks *stacks);
-void		rrr(t_stacks *stacks);
+void		sa_bonus(t_stacks *stacks);
+void		sb_bonus(t_stacks *stacks);
+void		ss_bonus(t_stacks *stacks);
+void		pa_bonus(t_stacks *stacks);
+void		pb_bonus(t_stacks *stacks);
+void		ra_bonus(t_stacks *stacks);
+void		rb_bonus(t_stacks *stacks);
+void		rr_bonus(t_stacks *stacks);
+void		rra_bonus(t_stacks *stacks);
+void		rrb_bonus(t_stacks *stacks);
+void		rrr_bonus(t_stacks *stacks);
 
 char		*join_arguments(int ac, char **av);
 int			check_input(int ac, char **av);

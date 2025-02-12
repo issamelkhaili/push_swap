@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/12 10:47:42 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:22:31 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 static void	execute_instruction(t_stacks *stacks, char *line)
 {
 	if (!ft_strcmp(line, "sa\n"))
-		sa(stacks);
+		sa_bonus(stacks);
 	else if (!ft_strcmp(line, "sb\n"))
-		sb(stacks);
+		sb_bonus(stacks);
 	else if (!ft_strcmp(line, "ss\n"))
-		ss(stacks);
+		ss_bonus(stacks);
 	else if (!ft_strcmp(line, "pa\n"))
-		pa(stacks);
+		pa_bonus(stacks);
 	else if (!ft_strcmp(line, "pb\n"))
-		pb(stacks);
+		pb_bonus(stacks);
 	else if (!ft_strcmp(line, "ra\n"))
-		ra(stacks);
+		ra_bonus(stacks);
 	else if (!ft_strcmp(line, "rb\n"))
-		rb(stacks);
+		rb_bonus(stacks);
 	else if (!ft_strcmp(line, "rr\n"))
-		rr(stacks);
+		rr_bonus(stacks);
 	else if (!ft_strcmp(line, "rra\n"))
-		rra(stacks);
+		rra_bonus(stacks);
 	else if (!ft_strcmp(line, "rrb\n"))
-		rrb(stacks);
+		rrb_bonus(stacks);
 	else if (!ft_strcmp(line, "rrr\n"))
-		rrr(stacks);
+		rrr_bonus(stacks);
 	else
 		error_exit(stacks);
 }

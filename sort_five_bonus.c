@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_four.c                                        :+:      :+:    :+:   */
+/*   sort_five.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,29 @@
 
 #include "checker_bonus.h"
 
-void	sort_four(t_stacks *stacks)
+void	sort_five(t_stacks *stacks)
 {
 	int	smallest_pos;
 
 	smallest_pos = find_smallest_pos(stacks);
 	if (smallest_pos == 1)
-		sa(stacks);
+		sa_bonus(stacks);
 	else if (smallest_pos == 2)
 	{
-		ra(stacks);
-		ra(stacks);
+		ra_bonus(stacks);
+		ra_bonus(stacks);
 	}
 	else if (smallest_pos == 3)
-		rra(stacks);
-	pb(stacks);
-	sort_three(stacks);
-	pa(stacks);
+	{
+		ra_bonus(stacks);
+		ra_bonus(stacks);
+		ra_bonus(stacks);
+	}
+	else if (smallest_pos == 4)
+	{
+		rra_bonus(stacks);
+	}
+	pb_bonus(stacks);
+	sort_four(stacks);
+	pa_bonus(stacks);
 }

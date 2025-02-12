@@ -39,11 +39,11 @@ static void	push_optimal_b(t_stacks *stacks, int target_idx)
 	}
 	if (pos <= stacks->size_b / 2)
 		while (pos--)
-			rb(stacks);
+			rb_bonus(stacks);
 	else
 		while (pos++ < stacks->size_b)
-			rrb(stacks);
-	pa(stacks);
+			rrb_bonus(stacks);
+	pa_bonus(stacks);
 }
 
 static void	push_back_to_a(t_stacks *stacks)
@@ -59,20 +59,20 @@ static void	push_back_to_a(t_stacks *stacks)
 
 static void	push_chunks_to_b(t_stacks *stacks, int chunk_size)
 {
-	int	current_size;
+	int	curr_bonusent_size;
 
 	while (stacks->size_a > 0)
 	{
-		current_size = stacks->size_b;
-		if (stacks->a[0] < current_size)
+		curr_bonusent_size = stacks->size_b;
+		if (stacks->a[0] < curr_bonusent_size)
 		{
-			pb(stacks);
-			rb(stacks);
+			pb_bonus(stacks);
+			rb_bonus(stacks);
 		}
-		else if (stacks->a[0] < current_size + chunk_size)
-			pb(stacks);
+		else if (stacks->a[0] < curr_bonusent_size + chunk_size)
+			pb_bonus(stacks);
 		else
-			ra(stacks);
+			ra_bonus(stacks);
 	}
 }
 
