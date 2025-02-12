@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting_utils.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/02 08:38:15 by isel-kha         ###   ########.fr       */
+/*   Created: 2025/01/05 10:50:09 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/02/12 11:49:44 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	find_smallest_pos(t_stacks *stacks)
-{
-	int	smallest;
-	int	smallest_pos;
-	int	i;
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <limits.h>
 
-	smallest = stacks->a[0];
-	smallest_pos = 0;
-	i = 1;
-	while (i < stacks->size_a)
-	{
-		if (stacks->a[i] < smallest)
-		{
-			smallest = stacks->a[i];
-			smallest_pos = i;
-		}
-		i++;
-	}
-	return (smallest_pos);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42 
+# endif
+
+char	*ft_strdup(const char *s);
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, char *s2);
+int		ft_strlen(const char *s);
+char	*ft_strchr(char *s, int c);
+
+#endif

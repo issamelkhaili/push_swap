@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate_operation.c                         :+:      :+:    :+:   */
+/*   reverse_rotate_operation_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 05:03:14 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/22 06:12:24 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:04:21 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-void	rra(t_stacks *stacks)
+void	rra_bonus(t_stacks *stacks)
 {
 	int	last;
 	int	i;
@@ -27,10 +27,9 @@ void	rra(t_stacks *stacks)
 		i--;
 	}
 	stacks->a[0] = last;
-	write(1, "rra\n", 4);
 }
 
-void	rrb(t_stacks *stacks)
+void	rrb_bonus(t_stacks *stacks)
 {
 	int	i;
 	int	last;
@@ -45,10 +44,9 @@ void	rrb(t_stacks *stacks)
 		i--;
 	}
 	stacks->b[0] = last;
-	write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stacks *stacks)
+void	rrr_bonus(t_stacks *stacks)
 {
 	int	last_a;
 	int	last_b;
@@ -72,5 +70,4 @@ void	rrr(t_stacks *stacks)
 		i--;
 	}
 	stacks->b[0] = last_b;
-	write(1, "rrr\n", 4);
 }

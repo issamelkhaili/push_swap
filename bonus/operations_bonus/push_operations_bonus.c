@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_operations.c                                  :+:      :+:    :+:   */
+/*   push_operations_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 02:33:33 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/22 06:27:58 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:03:39 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-void	pa(t_stacks *stacks)
+void	pa_bonus(t_stacks *stacks)
 {
 	int	i;
 
@@ -33,10 +33,9 @@ void	pa(t_stacks *stacks)
 	}
 	stacks->size_b--;
 	stacks->size_a++;
-	write(1, "pa\n", 3);
 }
 
-void	pb(t_stacks *stacks)
+void	pb_bonus(t_stacks *stacks)
 {
 	int	i;
 
@@ -57,5 +56,4 @@ void	pb(t_stacks *stacks)
 	}
 	stacks->size_a--;
 	stacks->size_b++;
-	write(1, "pb\n", 3);
 }

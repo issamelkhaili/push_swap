@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_operations.c                                :+:      :+:    :+:   */
+/*   rotate_operations_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 02:46:42 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/28 23:59:21 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:05:23 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-void	rb(t_stacks *stacks)
+void	rb_bonus(t_stacks *stacks)
 {
 	int	first;
 	int	i;
@@ -27,10 +27,9 @@ void	rb(t_stacks *stacks)
 		i++;
 	}
 	stacks->b[stacks->size_b - 1] = first;
-	write(1, "rb\n", 3);
 }
 
-void	ra(t_stacks *stacks)
+void	ra_bonus(t_stacks *stacks)
 {
 	int	first;
 	int	i;
@@ -45,10 +44,9 @@ void	ra(t_stacks *stacks)
 		i++;
 	}
 	stacks->a[stacks->size_a - 1] = first;
-	write(1, "ra\n", 3);
 }
 
-void	rr(t_stacks *stacks)
+void	rr_bonus(t_stacks *stacks)
 {
 	int	first_a;
 	int	first_b;
@@ -72,5 +70,4 @@ void	rr(t_stacks *stacks)
 		i++;
 	}
 	stacks->b[stacks->size_b - 1] = first_b;
-	write(1, "rr\n", 3);
 }
