@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 02:33:33 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/12 11:03:39 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:26:40 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	pa_bonus(t_stacks *stacks)
 {
 	int	i;
 
-	if (!stacks || stacks->size_b < 1)
-		clean_exit(stacks);
+	if (!stacks || !stacks->a || !stacks->b || stacks->size_b < 1)
+		return ;
 	i = stacks->size_a;
 	while (i > 0)
 	{
@@ -39,8 +39,8 @@ void	pb_bonus(t_stacks *stacks)
 {
 	int	i;
 
-	if (!stacks || stacks->size_a < 1)
-		clean_exit(stacks);
+	if (!stacks || !stacks->a || !stacks->b || stacks->size_a < 1)
+		return ;
 	i = stacks->size_b;
 	while (i > 0)
 	{

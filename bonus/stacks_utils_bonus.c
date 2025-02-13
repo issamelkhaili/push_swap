@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stacks_utils.c                                     :+:      :+:    :+:   */
+/*   stacks_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 06:23:51 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/23 03:29:13 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:51:45 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,23 @@ t_stacks	*init_stacks(int size)
 	t_stacks	*stacks;
 
 	if (size < 1)
-		exit_error();
+		return (NULL);
 	stacks = malloc(sizeof(t_stacks));
 	if (!stacks)
-		error_exit(stacks);
+		return (NULL);
 	stacks->a = malloc(sizeof(int) * size);
 	stacks->b = malloc(sizeof(int) * size);
 	if (!stacks->a || !stacks->b)
-		error_exit(stacks);
+	{
+		if (stacks->a)
+			free(stacks->a);
+		if (stacks->b)
+			free(stacks->b);
+		free(stacks);
+		return (NULL);
+	}
+	stacks->size_a = size;
+	stacks->size_b = 0;
 	return (stacks);
 }
 

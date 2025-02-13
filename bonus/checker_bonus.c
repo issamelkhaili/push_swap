@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/12 16:46:22 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:28:53 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,17 @@ static void	check_sort(t_stacks *stacks)
 static void	process_instructions(t_stacks *stacks)
 {
 	char	*line;
+	char	*tmp;
 
 	while (1)
 	{
 		line = get_next_line(0);
 		if (!line)
+		{
+			tmp = get_next_line(0);
+			free(tmp);
 			break ;
+		}
 		execute_instruction(stacks, line);
 		free(line);
 	}

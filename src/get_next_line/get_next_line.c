@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 10:50:09 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/12 16:33:09 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:24:04 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_update_store(char *store)
 	char	*new_store;
 
 	i = 0;
-	while (store[i] && store[i] != '\n')
+	while (store[i] != '\n' && store[i] != '\0')
 		i++;
 	if (!store[i])
 	{
