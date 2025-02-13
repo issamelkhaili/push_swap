@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 05:03:14 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/12 11:04:21 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:23:17 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	rrr_bonus(t_stacks *stacks)
 	int	last_b;
 	int	i;
 
-	if (!stacks || stacks->size_a < 2 || stacks->size_b < 2)
-		clean_exit(stacks);
+	//if (!stacks || stacks->size_a < 2 || stacks->size_b < 2)
+	//	clean_exit(stacks);
 	last_a = stacks->a[stacks->size_a - 1];
 	last_b = stacks->b[stacks->size_b - 1];
 	i = stacks->size_a - 1;

@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/12 13:22:31 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:46:22 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static void	execute_instruction(t_stacks *stacks, char *line)
 	else if (!ft_strcmp(line, "rrr\n"))
 		rrr_bonus(stacks);
 	else
+	{
+		free(line);
 		error_exit(stacks);
+	}
 }
 
 static void	check_sort(t_stacks *stacks)

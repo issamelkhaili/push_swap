@@ -6,10 +6,12 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 10:50:09 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/01/08 18:24:32 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:33:09 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
+#include "common.h"
 
 char	*freenull(char *tofree)
 {
