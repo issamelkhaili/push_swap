@@ -1,48 +1,81 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/14 13:00:50 by isel-kha          #+#    #+#              #
+#    Updated: 2025/02/14 13:12:33 by isel-kha         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap
 BONUS = checker
-
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=42
 INCLUDES = -I./includes
 
-PRINTF_DIR = src/ft_printf/
-GNL_DIR = src/get_next_line/
-SRC_DIR = src/
-COMMON_DIR = src/common/
+# Common source files used by both push_swap and checker
+COMMON_SRCS = src/ft_printf/ft_printf.c \
+              src/ft_printf/ft_putchar.c \
+              src/ft_printf/ft_putnbr.c \
+              src/ft_printf/ft_putstr.c \
+              src/ft_printf/takep.c \
+              src/ft_printf/takeu.c \
+              src/ft_printf/takex.c \
+              src/common/libft_utils.c
 
-PRINTF_SRC = ft_printf.c ft_putchar.c ft_putnbr.c ft_putstr.c takep.c takeu.c takex.c
-GNL_SRC = get_next_line.c get_next_line_utils.c
-COMMON_SRC = libft_utils.c
+SRCS = src/main.c \
+       src/check_input.c \
+       src/parsing.c \
+       src/parsing_utils.c \
+       src/stacks_utils.c \
+       src/return_error.c \
+       src/swap_operations.c \
+       src/push_operations.c \
+       src/rotate_operations.c \
+       src/reverse_rotate_operation.c \
+       src/sort_three.c \
+       src/sort_four.c \
+       src/sort_five.c \
+       src/sort_big.c \
+       src/index_utils.c \
+       src/sorting_utils.c \
+	   $(COMMON_SRCS)
 
-SRC = main.c check_input.c parsing.c parsing_utils.c stacks_utils.c \
-      return_error.c swap_operations.c push_operations.c rotate_operations.c \
-      reverse_rotate_operation.c sort_three.c sort_four.c sort_five.c \
-      sort_big.c index_utils.c sorting_utils.c
+BONUS_SRCS = bonus/checker_bonus.c \
+             bonus/check_input_bonus.c \
+             bonus/parsing_bonus.c \
+             bonus/parsing_utils_bonus.c \
+             bonus/stacks_utils_bonus.c \
+             bonus/return_error_bonus.c \
+             bonus/swap_operations_bonus.c \
+             bonus/push_operations_bonus.c \
+             bonus/rotate_operations_bonus.c \
+             bonus/reverse_rotate_operation_bonus.c \
+             bonus/sort_three_bonus.c \
+             bonus/sort_four_bonus.c \
+             bonus/sort_five_bonus.c \
+             bonus/sort_big_bonus.c \
+             bonus/index_utils_bonus.c \
+             bonus/sorting_utils_bonus.c \
+             src/get_next_line/get_next_line.c \
+             src/get_next_line/get_next_line_utils.c \
+             $(COMMON_SRCS)
 
-BONUS_SRC = checker_bonus.c check_input_bonus.c parsing_bonus.c parsing_utils_bonus.c \
-            stacks_utils_bonus.c return_error_bonus.c swap_operations_bonus.c \
-            push_operations_bonus.c rotate_operations_bonus.c \
-            reverse_rotate_operation_bonus.c sort_three_bonus.c sort_four_bonus.c \
-            sort_five_bonus.c sort_big_bonus.c index_utils_bonus.c sorting_utils_bonus.c
-
-SRCS = $(addprefix $(SRC_DIR), $(SRC))
-PRINTF_SRCS = $(addprefix $(PRINTF_DIR), $(PRINTF_SRC))
-GNL_SRCS = $(addprefix $(GNL_DIR), $(GNL_SRC))
-COMMON_SRCS = $(addprefix $(COMMON_DIR), $(COMMON_SRC))
-BONUS_SRCS = $(addprefix bonus/, $(BONUS_SRC))
-
-OBJS = $(SRCS:.c=.o) $(PRINTF_SRCS:.c=.o) $(COMMON_SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o) $(PRINTF_SRCS:.c=.o) $(GNL_SRCS:.c=.o) $(COMMON_SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) -o $(NAME)
 
 bonus: $(BONUS)
 
 $(BONUS): $(BONUS_OBJS)
-	$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(BONUS)
+	$(CC) $(BONUS_OBJS) -o $(BONUS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
