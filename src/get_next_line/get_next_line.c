@@ -3,115 +3,125 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 10:50:09 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/13 14:24:04 by isel-kha         ###   ########.fr       */
+/*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
+/*   Updated: 2021/11/08 23:14:55 by jdecorte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "common.h"
 
-char	*freenull(char *tofree)
+// join and free
+char	*ft_free(char *buffer, char *buf)
 {
-	free(tofree);
-	return (NULL);
-}
+	char	*temp;
 
-char	*ft_read_line(int fd, char *store)
-{
-	char	*buffer;
-	int		bytes_read;
-
-	buffer = malloc(BUFFER_SIZE + (size_t)1);
-	if (!buffer)
-		return (freenull(store));
-	bytes_read = 1;
-	while (!ft_strchr(store, '\n') && bytes_read > 0)
-	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
-		{
-			free(buffer);
-			return (freenull(store));
-		}
-		if (bytes_read == 0)
-			break ;
-		buffer[bytes_read] = '\0';
-		store = ft_strjoin(store, buffer);
-		if (!store)
-			return (freenull(store));
-	}
+	temp = ft_strjoin(buffer, buf);
 	free(buffer);
-	return (store);
+	return (temp);
 }
 
-char	*ft_extract_line(char *store)
-{
-	char	*line;
-	long	i;
-
-	i = 0;
-	if (!store || store[0] == '\0')
-		return (NULL);
-	while (store[i] != '\n' && store[i] != '\0')
-		i++;
-	line = malloc(i + 2);
-	if (!line)
-		return (NULL);
-	i = 0;
-	while (store[i] != '\n' && store[i] != '\0')
-	{
-		line[i] = store[i];
-		i++;
-	}
-	if (store[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
-	line[i] = '\0';
-	return (line);
-}
-
-char	*ft_update_store(char *store)
+// delete line find
+char	*ft_next(char *buffer)
 {
 	int		i;
 	int		j;
-	char	*new_store;
+	char	*line;
 
 	i = 0;
-	while (store[i] != '\n' && store[i] != '\0')
+	// find len of first line
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (!store[i])
+	// if eol == \0 return NULL
+	if (!buffer[i])
 	{
-		free(store);
+		free(buffer);
 		return (NULL);
 	}
-	new_store = malloc(ft_strlen(store) - i);
-	if (!new_store)
-		return (freenull(store));
+	// len of file - len of firstline + 1
+	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
-	while (store[i])
-		new_store[j++] = store[i++];
-	new_store[j] = '\0';
-	free(store);
-	return (new_store);
+	// line == buffer
+	while (buffer[i])
+		line[j++] = buffer[i++];
+	free(buffer);
+	return (line);
+}
+
+// take line for return
+char	*ft_line(char *buffer)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	// if no line return NULL
+	if (!buffer[i])
+		return (NULL);
+	// go to the eol
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	// malloc to eol
+	line = ft_calloc(i + 2, sizeof(char));
+	i = 0;
+	// line = buffer
+	while (buffer[i] && buffer[i] != '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	// if eol is \0 or \n, replace eol by \n
+	if (buffer[i] && buffer[i] == '\n')
+		line[i++] = '\n';
+	return (line);
+}
+
+char	*read_file(int fd, char *res)
+{
+	char	*buffer;
+	int		byte_read;
+
+	// malloc if res dont exist
+	if (!res)
+		res = ft_calloc(1, 1);
+	// malloc buffer
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	byte_read = 1;
+	while (byte_read > 0)
+	{
+		// while not eof read
+		byte_read = read(fd, buffer, BUFFER_SIZE);
+		if (byte_read == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		// 0 to end for leak
+		buffer[byte_read] = 0;
+		// join and free
+		res = ft_free(res, buffer);
+		// quit if \n find
+		if (ft_strchr(buffer, '\n'))
+			break ;
+	}
+	free(buffer);
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*store;
+	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+	// error handling
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	store = ft_read_line(fd, store);
-	if (!store)
+	buffer = read_file(fd, buffer);
+	if (!buffer)
 		return (NULL);
-	line = ft_extract_line(store);
-	store = ft_update_store(store);
+	line = ft_line(buffer);
+	buffer = ft_next(buffer);
 	return (line);
 }
