@@ -6,11 +6,8 @@
 #    By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 13:00:50 by isel-kha          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2025/02/14 13:39:15 by isel-kha         ###   ########.fr        #
-=======
+#    Updated: 2025/02/14 14:04:42 by isel-kha         ###   ########.fr        #
 #    Updated: 2025/02/14 13:12:33 by isel-kha         ###   ########.fr        #
->>>>>>> 35563cd3723288b54afd735a251db03604aa4d55
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +17,6 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=42
 INCLUDES = -I./includes
 
-# Common source files used by both push_swap and checker
 COMMON_SRCS = src/ft_printf/ft_printf.c \
               src/ft_printf/ft_putchar.c \
               src/ft_printf/ft_putnbr.c \
@@ -46,7 +42,7 @@ SRCS = src/main.c \
        src/sort_big.c \
        src/index_utils.c \
        src/sorting_utils.c \
-	   $(COMMON_SRCS)
+	$(COMMON_SRCS)
 
 BONUS_SRCS = bonus/checker_bonus.c \
              bonus/check_input_bonus.c \
