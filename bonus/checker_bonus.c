@@ -6,11 +6,17 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/13 14:28:53 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:45:17 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+
+static void	free_error_exit(t_stacks *stacks, char *line)
+{
+	free(line);
+	error_exit(stacks);
+}
 
 static void	execute_instruction(t_stacks *stacks, char *line)
 {
@@ -37,10 +43,7 @@ static void	execute_instruction(t_stacks *stacks, char *line)
 	else if (!ft_strcmp(line, "rrr\n"))
 		rrr_bonus(stacks);
 	else
-	{
-		free(line);
-		error_exit(stacks);
-	}
+		free_error_exit(stacks, line);
 }
 
 static void	check_sort(t_stacks *stacks)

@@ -36,8 +36,8 @@ void	sb_bonus(t_stacks *stacks)
 
 void	ss_bonus(t_stacks *stacks)
 {
-	if (!stacks || !stacks->a || !stacks->b || 
-		stacks->size_a < 2 || stacks->size_b < 2)
+	if (!stacks || !stacks->a || !stacks->b || stacks->size_a < 2
+		|| stacks->size_b < 2)
 		return ;
 	sa_bonus(stacks);
 	sb_bonus(stacks);

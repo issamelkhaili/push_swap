@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate_operations_bonus.c                  :+:      :+:    :+:   */
+/*   reverse_rotate_operation_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 05:03:14 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/13 13:11:58 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:32:49 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	rrb_bonus(t_stacks *stacks)
 
 void	rrr_bonus(t_stacks *stacks)
 {
-	if (!stacks || !stacks->a || !stacks->b || 
-		stacks->size_a < 2 || stacks->size_b < 2)
+	if (!stacks || !stacks->a || !stacks->b || stacks->size_a < 2
+		|| stacks->size_b < 2)
 		return ;
 	rra_bonus(stacks);
 	rrb_bonus(stacks);

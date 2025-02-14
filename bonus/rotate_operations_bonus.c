@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 02:46:42 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/13 13:24:43 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:31:31 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	ra_bonus(t_stacks *stacks)
 
 void	rr_bonus(t_stacks *stacks)
 {
-	if (!stacks || !stacks->a || !stacks->b || 
-		stacks->size_a < 2 || stacks->size_b < 2)
+	if (!stacks || !stacks->a || !stacks->b || stacks->size_a < 2
+		|| stacks->size_b < 2)
 		return ;
 	ra_bonus(stacks);
 	rb_bonus(stacks);
