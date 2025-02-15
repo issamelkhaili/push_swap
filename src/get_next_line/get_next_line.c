@@ -3,105 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2025/02/14 13:29:02 by isel-kha         ###   ########.fr       */
+/*   Created: 2025/02/14 14:35:00 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/02/15 14:57:55 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_free(char *buffer, char *buf)
+void	*gnl_free(char **store)
 {
-	char	*temp;
-
-	temp = ft_strjoin(buffer, buf);
-	free(buffer);
-	return (temp);
+	free(*store);
+	*store = NULL;
+	return (NULL);
 }
 
-char	*ft_next(char *buffer)
+int	ft_read_from_file(int fd, char *buffer, char **store)
 {
-	int		i;
-	int		j;
+	int		read_byte;
+	char	*tmp;
+
+	read_byte = read(fd, buffer, BUFFER_SIZE);
+	if (read_byte <= 0)
+		return (read_byte);
+	buffer[read_byte] = '\0';
+	tmp = gnl_strjoin(*store, buffer);
+	if (!tmp)
+		return (-1);
+	gnl_free(store);
+	*store = tmp;
+	return (read_byte);
+}
+
+char	*ft_extract_line(char **store)
+{
+	char	*new_pos;
+	char	*tmp;
 	char	*line;
 
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	if (!buffer[i])
-	{
-		free(buffer);
+	if (!*store || !**store)
 		return (NULL);
-	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
-	i++;
-	j = 0;
-	while (buffer[i])
-		line[j++] = buffer[i++];
-	free(buffer);
-	return (line);
-}
-
-char	*ft_line(char *buffer)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (!buffer[i])
-		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	line = ft_calloc(i + 2, sizeof(char));
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	new_pos = gnl_strchr(*store, '\n');
+	if (new_pos)
 	{
-		line[i] = buffer[i];
-		i++;
-	}
-	line[i++] = '\n';
-	return (line);
-}
-
-char	*read_file(int fd, char *res)
-{
-	char	*buffer;
-	int		byte_read;
-
-	if (!res)
-		res = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	byte_read = 1;
-	while (byte_read > 0)
-	{
-		byte_read = read(fd, buffer, BUFFER_SIZE);
-		if (byte_read == -1)
-		{
-			free(buffer);
+		line = gnl_substr(*store, 0, new_pos - *store + 1);
+		if (!line)
 			return (NULL);
-		}
-		buffer[byte_read] = 0;
-		res = ft_free(res, buffer);
-		if (ft_strchr(buffer, '\n'))
-			break ;
+		tmp = gnl_strdup(new_pos + 1);
+		if (!tmp)
+			return (gnl_free(&line));
+		gnl_free(store);
+		*store = tmp;
+		return (line);
 	}
-	free(buffer);
-	return (res);
+	line = gnl_strdup(*store);
+	gnl_free(store);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
+	static char		*store;
+	char			*buffer;
+	char			*line;
+	int				bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (NULL);
-	buffer = read_file(fd, buffer);
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= 2147483647
+		|| read(fd, 0, 0) == -1)
+		return (gnl_free(&store));
+	buffer = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
-		return (NULL);
-	line = ft_line(buffer);
-	buffer = ft_next(buffer);
+		return (gnl_free(&store));
+	while (!gnl_strchr(store, '\n'))
+	{
+		bytes_read = ft_read_from_file(fd, buffer, &store);
+		if (bytes_read == -1)
+			return (free(buffer), gnl_free(&store));
+		else if (bytes_read == 0)
+			break ;
+	}
+	free(buffer);
+	line = ft_extract_line(&store);
+	if (!line || !*line)
+		return (gnl_free(&store));
 	return (line);
 }
