@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 08:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/09 17:26:23 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/21 08:18:23 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	calculate_chunk(int size)
 	if (size <= 130)
 		return (size / 5);
 	else if (size > 130 && size <= 230)
-		return (35);
+		return (40);
 	return (45);
 }
 

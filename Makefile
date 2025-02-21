@@ -6,7 +6,7 @@
 #    By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 13:00:50 by isel-kha          #+#    #+#              #
-#    Updated: 2025/02/14 14:04:42 by isel-kha         ###   ########.fr        #
+#    Updated: 2025/02/21 08:06:56 by isel-kha         ###   ########.fr        #
 #    Updated: 2025/02/14 13:12:33 by isel-kha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -60,8 +60,6 @@ BONUS_SRCS = bonus/checker_bonus.c \
              bonus/sort_big_bonus.c \
              bonus/index_utils_bonus.c \
              bonus/sorting_utils_bonus.c \
-             src/get_next_line/get_next_line.c \
-             src/get_next_line/get_next_line_utils.c \
              $(COMMON_SRCS)
 
 OBJS = $(SRCS:.c=.o)
