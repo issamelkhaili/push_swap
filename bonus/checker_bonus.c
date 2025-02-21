@@ -6,11 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2025/02/21 21:06:16 by isel-kha         ###   ########.fr       */
-=======
-/*   Updated: 2025/02/21 08:44:31 by isel-kha         ###   ########.fr       */
->>>>>>> 2d25ba5fb91241cc321134cb76223814afe1ef25
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +53,7 @@ static void	check_sort(t_stacks *stacks)
 	else
 		ft_printf("KO\n");
 }
-/*
+
 static void	process_instructions(t_stacks *stacks)
 {
 	char	*line;
@@ -86,4 +82,4 @@ int	main(int ac, char **av)
 	if (stacks)
 		free_stacks(stacks);
 	return (0);
-}*/
+}
