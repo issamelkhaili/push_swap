@@ -6,7 +6,7 @@
 #    By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 13:00:50 by isel-kha          #+#    #+#              #
-#    Updated: 2025/02/21 08:06:56 by isel-kha         ###   ########.fr        #
+#    Updated: 2025/02/21 08:40:22 by isel-kha         ###   ########.fr        #
 #    Updated: 2025/02/14 13:12:33 by isel-kha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -17,13 +17,13 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=42
 INCLUDES = -I./includes
 
-COMMON_SRCS = src/ft_printf/ft_printf.c \
-              src/ft_printf/ft_putchar.c \
-              src/ft_printf/ft_putnbr.c \
-              src/ft_printf/ft_putstr.c \
-              src/ft_printf/takep.c \
-              src/ft_printf/takeu.c \
-              src/ft_printf/takex.c \
+COMMON_SRCS = bonus/ft_printf/ft_printf.c \
+              bonus/ft_printf/ft_putchar.c \
+              bonus/ft_printf/ft_putnbr.c \
+              bonus/ft_printf/ft_putstr.c \
+              bonus/ft_printf/takep.c \
+              bonus/ft_printf/takeu.c \
+              bonus/ft_printf/takex.c \
               src/common/libft_utils.c
 
 SRCS = src/main.c \

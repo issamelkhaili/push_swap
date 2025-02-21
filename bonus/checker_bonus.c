@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/21 08:11:36 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/21 08:44:31 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	check_sort(t_stacks *stacks)
 	else
 		ft_printf("KO\n");
 }
-
+/*
 static void	process_instructions(t_stacks *stacks)
 {
 	char	*line;
@@ -110,7 +110,7 @@ static void	process_instructions(t_stacks *stacks)
 	{
 		line = get_line(0);
 		if (!line)
-			break;
+			break ;
 		execute_instruction(stacks, line);
 		free(line);
 	}
@@ -130,4 +130,4 @@ int	main(int ac, char **av)
 	if (stacks)
 		free_stacks(stacks);
 	return (0);
-}
+}*/
