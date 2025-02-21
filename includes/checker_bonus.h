@@ -6,7 +6,7 @@
 /*   By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:33:34 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/02/21 08:20:52 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:02:23 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ int		find_smallest_pos(t_stacks *stacks);
 void	index_stack(t_stacks *stacks);
 
 int		ft_strcmp(const char *s1, const char *s2);
+
+char	*get_line(int fd);
 
 #endif

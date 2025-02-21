@@ -6,7 +6,11 @@
 #    By: isel-kha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 13:00:50 by isel-kha          #+#    #+#              #
+<<<<<<< HEAD
+#    Updated: 2025/02/21 21:07:05 by isel-kha         ###   ########.fr        #
+=======
 #    Updated: 2025/02/21 08:40:22 by isel-kha         ###   ########.fr        #
+>>>>>>> 2d25ba5fb91241cc321134cb76223814afe1ef25
 #    Updated: 2025/02/14 13:12:33 by isel-kha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -14,7 +18,7 @@
 NAME = push_swap
 BONUS = checker
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=42
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes
 
 COMMON_SRCS = bonus/ft_printf/ft_printf.c \
@@ -60,7 +64,8 @@ BONUS_SRCS = bonus/checker_bonus.c \
              bonus/sort_big_bonus.c \
              bonus/index_utils_bonus.c \
              bonus/sorting_utils_bonus.c \
-             $(COMMON_SRCS)
+             bonus/get_line.c \
+	     $(COMMON_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
